@@ -1,0 +1,60 @@
+<!--
+ - Created by Alex on 25/10/2018.
+ -->
+
+<apex:page id="FullDescProduct" controller="ProductListController" lightningStylesheets="true" >
+
+    <apex:slds />
+
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-text-align_center slds-text-heading_large">
+                        {!productField.Name}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="slds-grid slds-gutters" style="width: 100%">
+        <div class="slds-col" style="width: 50%; text-align: center; margin-top: 10px;">
+            <span>
+                <apex:image value="{!productField.Image_URL__c}"/>
+            </span>
+        </div>
+        <div class="slds-col" style="width: 50%">
+            <span>
+                <div style="padding: 50px 0 10px 0">
+                    <p>AMOUNT:</p>
+                    <p>{!productField.Units_Avalible__c}</p>
+                </div>
+                <div style="padding: 10px 0">
+                    <p>TITLE:</p>
+                    <p>{!productField.Product_description__c}</p>
+                </div>
+                <div style="padding: 10px 0">
+                    <p>DESCRIPTION:</p>
+                    <p>{!productField.Title__c}</p>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-text-align_center slds-text-heading_small" >
+                    <apex:form>
+                        <apex:commandLink value="To Shopping" action="{!RedirectToShopping}" styleClass="slds-button slds-button_neutral">
+                        </apex:commandLink>
+                        <apex:commandLink value="Buy" action="{!redirectToFullStore}" styleClass="slds-button slds-button_brand">
+
+                        </apex:commandLink>
+                    </apex:form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</apex:page>

@@ -1,0 +1,110 @@
+
+<!--
+ - Created by Alex on 25/10/2018.
+ -->
+
+<apex:page id="BuyProduct" controller="ProductListController" lightningStylesheets="true" >
+Buy
+    <apex:slds />
+
+    <!--<div class="slds-box">-->
+
+    <div class="slds-page-header slds-text-heading_medium" style="display: flex; justify-content: space-around">
+        <div class="slds-text-align_center">Contact Information</div>
+        <div class="slds-text-align_center">Product Information</div>
+    </div>
+    <div class="slds-vf-scope">
+        <apex:form>
+            <div class="demo-only slds-grid slds-wrap">
+                <div class="slds-size_1-of-2">
+                    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                        <div style="background-color: #fff;">
+                        <apex:pageBlock  >
+                            <apex:outputPanel layout="block" styleClass="slds-panel slds-grid slds-grid--vertical slds-nowrap slds-form--compound" style="width: 400px; margin: 0 auto;">
+                                <apex:pageBlockSection  columns="1" showHeader="false">
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField styleClass="slds-input" value="{!contactMainInfo.Email}" />
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField styleClass="slds-input" value="{!contactMainInfo.FirstName}" />
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField styleClass="slds-input" value="{!contactMainInfo.LastName}" />
+                                    </div>
+                                </apex:pageBlockSection>
+                            </apex:outputPanel>
+                        </apex:pageBlock>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-size_1-of-2">
+                    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                        <apex:pageBlock id="out" >
+                            <apex:outputPanel layout="block" styleClass="slds-panel slds-grid slds-grid--vertical slds-nowrap slds-form--compound" style="width: 400px; margin: 0 auto;">
+                                <apex:pageBlockSection columns="1" showHeader="false">
+                                    <apex:outputText value="{!productField.Name}" />
+                                    <apex:outputText value="{!productField.Unit_Price__c}" />
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField styleClass="slds-input" value="{!containOrderInfo.Units__c}" onChange="changeUnitHandler()" />
+                                    </div>
+                                    <apex:outputText value="{!containOrderInfo.Order_Amount__c}" />
+                                </apex:pageBlockSection>
+                            </apex:outputPanel>
+                            <apex:pageMessages/>
+                        </apex:pageBlock>
+                        <apex:actionFunction name="callCalcFunction" action="{!calculateOrderAmount}" reRender="out" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-text-align_center slds-text-heading_small">
+                            <apex:commandLink value="To Shopping" action="{!RedirectToShopping}" styleClass="slds-button slds-button_neutral">
+
+                            </apex:commandLink>
+                            <apex:commandButton value="Buy" action="{!makePurchase}" styleClass="slds-button slds-button_brand">
+
+                            </apex:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </apex:form>
+    </div>
+
+    <!--</div>-->
+    <style>
+        body .bPageBlock, body #bodyCell .bResource .secondaryPalette, body .secondaryPalette.bPageBlock, body .individualPalette .secondaryPalette.bPageBlock, body .bodyDiv .genericTable, body .genericPageBlockTable, body .bodyDiv .bSubBlock, body .bComponentBlock .bPageBlock, body .bMyDashboard .bPageBlock, body.rlHoverFrame .bPageBlock, body.subjectSelectionPopup div.choicesBox, body.lookupTab .secondaryPalette.bPageBlock, body.popupTab .secondaryPalette.bPageBlock, body.UserTagStatsPage .secondaryPalette.bPageBlock {
+            background-color: white !important;
+        }
+        .Custom5Tab .listViewport .subNav .linkBar, .Custom5Tab .mComponent .cHeader, .Custom5Tab .genericTable, .Custom5Tab .bSubBlock, .Custom5Tab .bPageBlock {
+            border-top: none;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+        }
+    </style>
+
+    <script>
+
+        function changeUnitHandler() {
+            callCalcFunction();
+            console.log('Hello');
+        }
+
+        function coolBuy() {
+            alert('Hello');
+        }
+
+        function error() {
+            alert('try again');
+        }
+
+    </script>
+
+
+</apex:page>

@@ -1,0 +1,56 @@
+<apex:page controller="ProductListController" lightningStylesheets="true">
+    
+    <apex:slds />
+    
+    <apex:pageBlock title="ProductList">
+        <apex:form>
+
+        <!-- Product List -->
+        
+        <apex:pageBlockTable var="list" value="{!NewProductTables}" styleClass="slds-table" >
+            
+            <apex:column headerValue="IMAGE" style="width: 10%;">
+            	<apex:image width="100" height="100" value="{!list.Image_URL__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="" style="width: 5%;">
+                <apex:commandLink value="{!list.Name}" action="{!redirectToFullPageProduct}">
+                    <apex:param value="{!list.Id}" name="recordID" assignTo="{!myProductId}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+            <apex:column headerValue="TITLE" style="white-space: normal; width: 30%;">
+               	<apex:outputText value="{!list.Title__c}">
+
+                </apex:outputText>
+            </apex:column>
+            
+            <apex:column headerValue="DESCRIPTION" style="width: 45%; white-space: normal;">
+                <apex:outputText value="{!IF(LEN(list.Product_description__c) > 100,
+                                        LEFT(list.Product_description__c, 92) + '... ' ,
+                						 list.Product_description__c)}">
+            	</apex:outputText>
+                <apex:outputLink rendered="{!LEN(list.Product_description__c) > 100}">
+                    <a href="about:blank" target="_blank">More</a>
+                </apex:outputLink>
+            </apex:column>
+            
+            <apex:column headerValue="COST">
+               	<apex:outputText value="{!list.Unit_Price__c}$">
+                    
+                </apex:outputText>           	
+            </apex:column>
+            
+            <apex:column headerValue="">
+                <apex:commandLink value="Buy" action="{!redirectToFullStore}" styleClass="slds-button slds-button_brand">
+                    <apex:param value="{!list.Id}" name="recordID" assignTo="{!myProductId}"/>
+                </apex:commandLink>
+            </apex:column>
+
+        </apex:pageBlockTable>
+
+        </apex:form>
+
+    </apex:pageBlock>
+  
+</apex:page>
